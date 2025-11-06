@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <gtk/gtk.h>
 
 struct Dico{
     char PPseudo[5];
@@ -12,7 +13,16 @@ int LireMdp(struct Dico Paire){
     return 0;
 };
 
-int main(){
+int GUI(int argc, char** argv){
+    gtk_init(&argc, &argv);
+    GtkWidget *window;
+    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_widget_show_all(window);
+    gtk_main();
+    return 0;
+};
+
+int main(int argc, char** argv){
     printf("Votre pseudo ? (Max 5 char):");
     int l;
     char Entry[5];
@@ -47,8 +57,9 @@ int main(){
         sleep(2);
     }
 
-    if(strcmp(Entry3, "oui") == 0)
+    if(strcmp(Entry3, "oui") == 0){
         LireMdp(Paire1);
-
+        GUI(argc, argv);
+    }
     return 0;
-}
+};
